@@ -107,6 +107,83 @@
     }
   });
 
+  /* ---------- contact form ---------- */
+  var form = document.getElementById('contactForm');
+  var status = document.getElementById('cf-status');
+  var submit = document.getElementById('cf-submit');
+  var label = submit.querySelector('.cf-label');
+  var PLACEHOLDER = 'YOUR_WEB3FORMS_ACCESS_KEY';
+
+  function say(msg, ok) {
+    status.textContent = msg;
+    status.className = 'form__status ' + (ok ? 'is-ok' : 'is-err');
+  }
+
+  function invalid(el, yes) {
+    if (yes) { el.setAttribute('aria-invalid', 'true'); }
+    else { el.removeAttribute('aria-invalid'); }
+  }
+
+  // clear the error state as soon as the visitor starts fixing it
+  form.addEventListener('input', function (e) {
+    if (e.target.hasAttribute('aria-invalid')) invalid(e.target, false);
+  });
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    var name = form.elements.name;
+    var email = form.elements.email;
+    var message = form.elements.message;
+    var bad = null;
+
+    [name, email, message].forEach(function (el) { invalid(el, false); });
+
+    if (!message.value.trim()) { invalid(message, true); bad = message; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) { invalid(email, true); bad = email; }
+    if (!name.value.trim()) { invalid(name, true); bad = name; }
+
+    if (bad) {
+      say('Please fill in your name, a valid email and a message.', false);
+      bad.focus();
+      return;
+    }
+
+    if (form.elements.access_key.value === PLACEHOLDER) {
+      say('This form is not connected yet — add a Web3Forms access key. Meanwhile, email me directly.', false);
+      return;
+    }
+
+    var payload = {};
+    new FormData(form).forEach(function (v, k) { payload[k] = v; });
+
+    submit.disabled = true;
+    label.textContent = 'Sending…';
+    status.className = 'form__status';
+
+    fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify(payload)
+    })
+      .then(function (r) { return r.json().catch(function () { return {}; }); })
+      .then(function (data) {
+        if (data && data.success) {
+          form.reset();
+          say('Thanks — your message is on its way. I will get back to you soon.', true);
+        } else {
+          say((data && data.message) || 'Something went wrong. Please email me directly instead.', false);
+        }
+      })
+      .catch(function () {
+        say('Could not reach the server. Please email me directly instead.', false);
+      })
+      .then(function () {
+        submit.disabled = false;
+        label.textContent = 'Send message';
+      });
+  });
+
   /* ---------- year ---------- */
   document.getElementById('year').textContent = new Date().getFullYear();
 })();

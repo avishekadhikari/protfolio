@@ -358,14 +358,55 @@
       </div>
     </div>
 
-    <div class="cta reveal">
-      <div>
-        <h3>Have a role or a project in mind?</h3>
-        <p>The fastest way to reach me is email — I usually reply the same day.</p>
+    <div class="contactgrid">
+      <!-- ---------- message form ---------- -->
+      <div class="card card--form reveal">
+        <h3 class="form__h">Send me a message</h3>
+        <p class="form__sub">Fill this in and it lands straight in my inbox. I usually reply the same day.</p>
+
+        <form id="contactForm" novalidate>
+          <!-- Web3Forms access key. Get a free one at https://web3forms.com -->
+          <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY">
+          <input type="hidden" name="subject" value="New message from your portfolio">
+          <input type="hidden" name="from_name" value="Portfolio contact form">
+          <!-- spam honeypot: real people never fill this in -->
+          <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off">
+
+          <div class="field2">
+            <p class="field">
+              <label for="cf-name">Name</label>
+              <input type="text" id="cf-name" name="name" required autocomplete="name" placeholder="Your name">
+            </p>
+            <p class="field">
+              <label for="cf-email">Email</label>
+              <input type="email" id="cf-email" name="email" required autocomplete="email" placeholder="you@example.com">
+            </p>
+          </div>
+
+          <p class="field">
+            <label for="cf-msg">Message</label>
+            <textarea id="cf-msg" name="message" rows="5" required placeholder="Tell me about the role or project…"></textarea>
+          </p>
+
+          <button type="submit" class="btn btn--primary form__submit" id="cf-submit">
+            <span class="cf-label">Send message</span>
+            <svg class="i" viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </button>
+
+          <p class="form__status" id="cf-status" role="status" aria-live="polite"></p>
+        </form>
       </div>
-      <div class="btnrow">
-        <a class="btn btn--primary" href="mailto:adhikariavishek2003@gmail.com">Email me</a>
-        <button class="btn btn--onDark" id="copyEmail" data-copy="adhikariavishek2003@gmail.com">Copy address</button>
+
+      <!-- ---------- direct alternatives ---------- -->
+      <div class="cta cta--stack reveal">
+        <div>
+          <h3>Prefer something direct?</h3>
+          <p>Email or WhatsApp me instead — whatever is easiest for you.</p>
+        </div>
+        <div class="btnrow">
+          <a class="btn btn--primary" href="mailto:adhikariavishek2003@gmail.com">Email me</a>
+          <button class="btn btn--onDark" id="copyEmail" data-copy="adhikariavishek2003@gmail.com">Copy address</button>
+        </div>
       </div>
     </div>
   </section>

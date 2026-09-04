@@ -289,6 +289,40 @@ a.card--contact:hover{transform:translateY(-3px);box-shadow:var(--shadow);border
   text-transform:uppercase;color:var(--ink-3)}
 .val{display:block;margin-top:.25rem;font-size:.96rem;font-weight:600;word-break:break-word}
 
+.contactgrid{display:grid;grid-template-columns:1.35fr .65fr;gap:1rem;margin-top:1rem;align-items:start}
+
+/* ---------- contact form ---------- */
+.card--form{padding:clamp(1.5rem,3vw,2rem)}
+.form__h{font-size:1.15rem}
+.form__sub{margin-top:.4rem;color:var(--ink-2);font-size:.93rem}
+.card--form form{margin-top:1.4rem}
+.field2{display:grid;grid-template-columns:1fr 1fr;gap:.9rem}
+.field{display:flex;flex-direction:column;gap:.4rem;margin-bottom:.9rem}
+.field label{font-size:.82rem;font-weight:700;color:var(--ink)}
+.field input,.field textarea{
+  font-family:inherit;font-size:.94rem;color:var(--ink);
+  padding:.72rem .85rem;border:1px solid var(--line-2);border-radius:10px;
+  background:#fbfcfd;transition:border-color .2s ease,box-shadow .2s ease,background .2s ease;
+}
+.field textarea{resize:vertical;min-height:118px}
+.field input::placeholder,.field textarea::placeholder{color:var(--ink-3)}
+.field input:focus,.field textarea:focus{
+  outline:none;background:var(--card);border-color:var(--green);
+  box-shadow:0 0 0 3px var(--green-lt);
+}
+.field input[aria-invalid="true"],.field textarea[aria-invalid="true"]{
+  border-color:#d64545;box-shadow:0 0 0 3px rgba(214,69,69,.12);
+}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+.form__submit{margin-top:.3rem}
+.form__submit[disabled]{opacity:.65;pointer-events:none}
+.form__status{margin-top:.9rem;font-size:.89rem;font-weight:600;display:none}
+.form__status.is-ok{display:block;color:var(--green-dk)}
+.form__status.is-err{display:block;color:#c23b3b}
+
+.cta--stack{margin-top:0;flex-direction:column;align-items:flex-start;height:auto}
+.cta--stack .btnrow{margin-top:1.2rem}
+
 .cta{
   margin-top:1rem;background:var(--ink);color:#fff;border-radius:var(--r-lg);
   padding:clamp(1.6rem,4vw,2.4rem);
@@ -330,6 +364,7 @@ a.card--contact:hover{transform:translateY(-3px);box-shadow:var(--shadow);border
   .pillnav a{padding:.5rem .7rem;font-size:.82rem}
 }
 @media (max-width:860px){
+  .contactgrid{grid-template-columns:1fr}
   .card--feat{grid-template-columns:1fr}
   .feat__shot{border-right:0;border-bottom:1px solid var(--line)}
   .hero{grid-template-columns:1fr;gap:2rem}
@@ -351,6 +386,7 @@ a.card--contact:hover{transform:translateY(-3px);box-shadow:var(--shadow);border
   .cta{flex-direction:column;align-items:flex-start}
 }
 @media (max-width:560px){
+  .field2{grid-template-columns:1fr;gap:0}
   .grid--7{grid-template-columns:repeat(2,1fr)}
   .stats{grid-template-columns:1fr}
   .card__top{flex-direction:column;gap:.6rem}
@@ -366,7 +402,7 @@ a.card--contact:hover{transform:translateY(-3px);box-shadow:var(--shadow);border
 }
 
 @media print{
-  .topbar,.progress,.wa,.btnrow,.footer__links{display:none}
+  .topbar,.progress,.wa,.btnrow,.footer__links,.card--form{display:none}
   body{background:#fff}
   .card,.tile,.stat{box-shadow:none;break-inside:avoid}
   .cta{background:#fff;color:#000;border:1px solid #ccc}
