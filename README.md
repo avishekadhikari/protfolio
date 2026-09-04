@@ -33,3 +33,17 @@ the repo and choose "Other" as the framework preset.
   header avatar and the hero).
 - **CV**: replace `assets/Avishek-Adhikari-CV.pdf`.
 - **WhatsApp button**: the number is in the `.wa` link at the bottom of `index.html`.
+
+## Contact form
+
+The form posts to [Web3Forms](https://web3forms.com) — no backend, no build step.
+Submissions are emailed to the address the access key was registered with.
+
+- The key lives in the `access_key` hidden input in `index.html`. It is a **public**
+  key and is safe to commit; it only identifies which inbox to deliver to.
+- Reply-to is set automatically from the visitor's `email` field, so replying to a
+  notification goes straight back to the sender.
+- A `botcheck` honeypot field filters spam. Free tier allows 250 submissions/month.
+- To change the destination inbox, register a new key at web3forms.com and swap it in.
+- To switch providers (e.g. Formspree), change the `fetch` URL in `script.js` and the
+  hidden fields in `index.html`; the markup and validation stay the same.
