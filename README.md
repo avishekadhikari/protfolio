@@ -31,7 +31,9 @@ the repo and choose "Other" as the framework preset.
   whole accent system, `--bg` the page canvas.
 - **Photo**: replace `assets/photo.jpg` (portrait crop works best; it is used in both the
   header avatar and the hero).
-- **CV**: replace `assets/Avishek-Adhikari-CV.pdf`.
+- **CV**: edit `assets/Avishek-Adhikari-CV.html`, then regenerate the PDF with
+  `google-chrome --headless=new --no-pdf-header-footer --print-to-pdf=assets/Avishek-Adhikari-CV.pdf assets/Avishek-Adhikari-CV.html`
+  (or just replace `assets/Avishek-Adhikari-CV.pdf` directly).
 - **WhatsApp button**: the number is in the `.wa` link at the bottom of `index.html`.
 
 ## Contact form
